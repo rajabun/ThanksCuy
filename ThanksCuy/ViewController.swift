@@ -29,9 +29,8 @@ class ViewController: UIViewController {
         //initiation for class Counter
         counterInstance = Counter(stepCount: 0, mistakeCount: 0)
         
-        letsPlay()
-        
         //update ui after initiation
+        setSwitchColor()
         updateUI()
     }
     
@@ -46,11 +45,44 @@ class ViewController: UIViewController {
 
     @IBAction func topLeftSwitchClicked(_ sender: UISwitch)
     {
-        if topLeftSwitch.isOn == true
+        if let instance = counterInstance
         {
-            view.backgroundColor = .blue
-            topMiddleSwitch.setOn(true, animated: true)
-            if let instance = counterInstance
+            if instance.steps > 10
+            {
+                allOn()
+            }
+            
+            if topLeftSwitch.isOn == true
+            {
+                view.backgroundColor = .blue
+                topMiddleSwitch.setOn(true, animated: true)
+                instance.increaseStepCount()
+            }
+            else
+            {
+                instance.increaseStepCount()
+            }
+        }
+        
+        updateUI()
+    }
+    
+    @IBAction func topMiddleSwitchClicked(_ sender: UISwitch)
+    {
+        if let instance = counterInstance
+        {
+            if instance.steps > 10
+            {
+                allOn()
+            }
+            
+            if topMiddleSwitch.isOn == true
+            {
+                view.backgroundColor = .yellow
+                topLeftSwitch.setOn(false, animated: true)
+                instance.increaseStepCount()
+            }
+            else
             {
                 instance.increaseStepCount()
             }
@@ -58,33 +90,99 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-    @IBAction func topMiddleSwitchClicked(_ sender: UISwitch)
-    {
-        
-    }
-    
     @IBAction func topRightSwitchClicked(_ sender: UISwitch)
     {
-        
+        if let instance = counterInstance
+        {
+            if instance.steps > 10
+            {
+                allOn()
+            }
+            
+            if topRightSwitch.isOn == true
+            {
+                view.backgroundColor = .white
+                topMiddleSwitch.setOn(true, animated: true)
+                instance.increaseStepCount()
+            }
+            else
+            {
+                instance.increaseStepCount()
+            }
+        }
+        updateUI()
     }
     
     @IBAction func bottomLeftSwitchClicked(_ sender: UISwitch)
     {
-        
+        if let instance = counterInstance
+        {
+            if instance.steps > 10
+            {
+                allOff()
+            }
+            
+            if bottomLeftSwitch.isOn == true
+            {
+                view.backgroundColor = .blue
+                topMiddleSwitch.setOn(true, animated: true)
+                instance.increaseStepCount()
+            }
+            else
+            {
+                instance.increaseStepCount()
+            }
+        }
+        updateUI()
     }
     
     @IBAction func bottomMiddleSwitchClicked(_ sender: UISwitch)
     {
-        
+        if let instance = counterInstance
+        {
+            if instance.steps > 10
+            {
+                allOn()
+            }
+            
+            if bottomMiddleSwitch.isOn == true
+            {
+                view.backgroundColor = .blue
+                topMiddleSwitch.setOn(true, animated: true)
+                instance.increaseStepCount()
+            }
+            else
+            {
+                instance.increaseStepCount()
+            }
+        }
+        updateUI()
     }
     
     @IBAction func bottomRightSwitchClicked(_ sender: UISwitch)
     {
-        
+        if let instance = counterInstance
+        {
+            if instance.steps > 10
+            {
+                allOn()
+            }
+            if bottomRightSwitch.isOn == true
+            {
+                view.backgroundColor = .blue
+                topMiddleSwitch.setOn(true, animated: true)
+                instance.increaseStepCount()
+            }
+            else
+            {
+                instance.increaseStepCount()
+            }
+        }
+        updateUI()
     }
     
     
-    func letsPlay()
+    func buildShape()
     {
         if topLeftSwitch.isOn == true
         {
@@ -95,7 +193,30 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    func allOn()
+    {
+        topLeftSwitch.setOn(true, animated: true)
+        topMiddleSwitch.setOn(true, animated: true)
+        topRightSwitch.setOn(true, animated: true)
+        bottomLeftSwitch.setOn(true, animated: true)
+        bottomMiddleSwitch.setOn(true, animated: true)
+        bottomRightSwitch.setOn(true, animated: true)
+    }
     
+    func allOff()
+    {
+        topLeftSwitch.setOn(false, animated: true)
+        topMiddleSwitch.setOn(false, animated: true)
+        topRightSwitch.setOn(false, animated: true)
+        bottomLeftSwitch.setOn(false, animated: true)
+        bottomMiddleSwitch.setOn(false, animated: true)
+        bottomRightSwitch.setOn(false, animated: true)
+    }
     
+    func setSwitchColor()
+    {
+        topLeftSwitch.onTintColor = #colorLiteral(red: 0.9421673417, green: 0.9228832722, blue: 0.031715855, alpha: 1)
+        
+    }
 }
 
