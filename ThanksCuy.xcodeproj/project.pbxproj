@@ -12,6 +12,7 @@
 		4EC86E93228E573A00783BF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EC86E91228E573A00783BF6 /* Main.storyboard */; };
 		4EC86E95228E573A00783BF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EC86E94228E573A00783BF6 /* Assets.xcassets */; };
 		4EC86E98228E573A00783BF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EC86E96228E573A00783BF6 /* LaunchScreen.storyboard */; };
+		4EC86EA0228E5C2B00783BF6 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC86E9F228E5C2B00783BF6 /* Counter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		4EC86E94228E573A00783BF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EC86E97228E573A00783BF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EC86E99228E573A00783BF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EC86E9F228E5C2B00783BF6 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				4EC86E8D228E573A00783BF6 /* AppDelegate.swift */,
 				4EC86E8F228E573A00783BF6 /* ViewController.swift */,
 				4EC86E91228E573A00783BF6 /* Main.storyboard */,
+				4EC86E9F228E5C2B00783BF6 /* Counter.swift */,
 				4EC86E94228E573A00783BF6 /* Assets.xcassets */,
 				4EC86E96228E573A00783BF6 /* LaunchScreen.storyboard */,
 				4EC86E99228E573A00783BF6 /* Info.plist */,
@@ -137,6 +140,7 @@
 			files = (
 				4EC86E90228E573A00783BF6 /* ViewController.swift in Sources */,
 				4EC86E8E228E573A00783BF6 /* AppDelegate.swift in Sources */,
+				4EC86EA0228E5C2B00783BF6 /* Counter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
