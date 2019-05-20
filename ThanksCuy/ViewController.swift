@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mistakesLabel: UILabel!
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var circleShape: UIButton!
-    
+    var currentAnimation = 0
     
     var counterInstance: Counter?
     
@@ -34,7 +34,6 @@ class ViewController: UIViewController {
         circleShape.layer.cornerRadius = circleShape.frame.width/2
         
         //update ui after initiation
-        setSwitchColor()
         updateUI()
     }
     
@@ -42,24 +41,20 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakesLabel.text = "\(instance.switches)"
+            mistakesLabel.text = "\(instance.mistakes)"
             stepLabel.text = "\(instance.steps)"
         }
     }
 
     @IBAction func topLeftSwitchClicked(_ sender: UISwitch)
     {
+        moreThanTenSteps()
         if let instance = counterInstance
         {
             if topLeftSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                topMiddleSwitchOn()
-//                if topMiddleSwitch.isOn == false
-//                {
-//                    instance.decreaseSwitchCount()
-//                }
             }
             else
             {
@@ -67,7 +62,6 @@ class ViewController: UIViewController {
             }
             instance.increaseStepCount()
         }
-        
         updateUI()
     }
     
@@ -79,15 +73,9 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .yellow
-                topRightSwitchOn()
-//                if topRightSwitch.isOn == false
-//                {
-//                    instance.decreaseSwitchCount()
-//                }
             }
             else
             {
-                //topLeftSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
             }
             instance.increaseStepCount()
@@ -110,13 +98,6 @@ class ViewController: UIViewController {
             {
                 instance.decreaseSwitchCount()
             }
-            /*
-            if topLeftSwitch.isOn == false && topMiddleSwitch.isOn == false
-            {
-                instance.increaseSwitchCount()
-                instance.increaseSwitchCount()
-            }
-             */
             instance.increaseStepCount()
         }
         updateUI()
@@ -131,15 +112,7 @@ class ViewController: UIViewController {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
                 bottomMiddleSwitchOff()
-//                if bottomMiddleSwitch.isOn == true
-//                {
-//                    instance.increaseSwitchCount()
-//                }
                 bottomRightSwitchOff()
-//                if bottomRightSwitch.isOn == true
-//                {
-//                    instance.increaseSwitchCount()
-//                }
             }
             else
             {
@@ -159,10 +132,6 @@ class ViewController: UIViewController {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
                 bottomLeftSwitchOff()
-//                if topLeftSwitch.isOn == true
-//                {
-//                    instance.increaseSwitchCount()
-//                }
             }
             else
             {
@@ -181,11 +150,6 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                bottomMiddleSwitchOn()
-//                if bottomMiddleSwitch.isOn == false
-//                {
-//                    instance.decreaseSwitchCount()
-//                }
             }
             else
             {
@@ -193,18 +157,6 @@ class ViewController: UIViewController {
             }
             instance.increaseStepCount()
         }
-        updateUI()
-    }
-    
-    
-    func buildShape()
-    {
-        if topLeftSwitch.isOn == true
-        {
-            
-            
-        }
-        //update ui after initiation
         updateUI()
     }
     
@@ -260,10 +212,6 @@ class ViewController: UIViewController {
                 topLeftSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
-            else
-            {
-                
-            }
         }
     }
     
@@ -271,18 +219,12 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if topLeftSwitch.isOn == false
+            if topLeftSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 topLeftSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
             }
-            //topLeftSwitch.setOn(false, animated: true)
-            //instance.decreaseSwitchCount()
         }
     }
     
@@ -295,10 +237,6 @@ class ViewController: UIViewController {
                 topMiddleSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
-            else
-            {
-                //instance.decreaseSwitchCount()
-            }
         }
     }
     
@@ -306,18 +244,12 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if topMiddleSwitch.isOn == false
+           if topMiddleSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 topMiddleSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
             }
-            //topMiddleSwitch.setOn(false, animated: true)
-            //instance.decreaseSwitchCount()
         }
     }
     
@@ -330,10 +262,6 @@ class ViewController: UIViewController {
                 topRightSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
-            else
-            {
-                
-            }
         }
     }
     
@@ -341,13 +269,9 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if topRightSwitch.isOn == false
+           if topRightSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 topRightSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
             }
@@ -363,10 +287,6 @@ class ViewController: UIViewController {
                 bottomLeftSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
-            else
-            {
-                
-            }
         }
     }
     
@@ -374,13 +294,9 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if bottomLeftSwitch.isOn == false
+            if bottomLeftSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 bottomLeftSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
             }
@@ -403,16 +319,12 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if bottomMiddleSwitch.isOn == false
+            if bottomMiddleSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 bottomMiddleSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
-            }
+           }
         }
     }
     
@@ -425,10 +337,6 @@ class ViewController: UIViewController {
                 bottomRightSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
-            else
-            {
-                
-            }
         }
     }
     
@@ -436,20 +344,18 @@ class ViewController: UIViewController {
     {
         if let instance = counterInstance
         {
-            mistakeAnimation()
-            if bottomRightSwitch.isOn == false
+            //mistakeAnimation()
+            if bottomRightSwitch.isOn == true
             {
-                //instance.increaseSwitchCount()
-            }
-            else
-            {
+                mistakeApplied()
                 bottomRightSwitch.setOn(false, animated: true)
                 instance.decreaseSwitchCount()
+                //instance.increaseMistakeCount()
             }
         }
     }
     
-    func mistakeAnimation()
+    func mistakeLabelAnimation()
     {
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
             {
@@ -461,6 +367,45 @@ class ViewController: UIViewController {
                             self.mistakesLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
                         }, completion: nil)
                 })
+    }
+    
+    func mistakeApplied()
+    {
+        if let instance = counterInstance
+        {
+            mistakeLabelAnimation()
+            instance.increaseMistakeCount()
+            UIView.animate(withDuration: 1)
+            {
+                switch self.currentAnimation
+                {
+                    case 0:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    case 1:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
+                    case 2:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+                    case 3:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
+                    case 4:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
+                    case 5:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
+                    case 6:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 4.5, y: 4.5)
+                    case 7:
+                        self.circleShape.transform = CGAffineTransform(scaleX: 5, y: 5)
+                    default:
+                        break
+                }
+            }
+        }
+        self.currentAnimation += 1
+        if self.currentAnimation > 7
+        {
+            self.currentAnimation = 0
+        }
+        print(self.currentAnimation)
     }
     
     func setSwitchColor()
