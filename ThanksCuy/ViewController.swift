@@ -51,8 +51,7 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                topMiddleSwitch.setOn(true, animated: true)
-                instance.increaseSwitchCount()
+                topMiddleSwitchOn()
                 if topMiddleSwitch.isOn == false
                 {
                     instance.decreaseSwitchCount()
@@ -76,8 +75,7 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .yellow
-                topRightSwitch.setOn(true, animated: true)
-                instance.increaseSwitchCount()
+                topRightSwitchOn()
                 if topRightSwitch.isOn == false
                 {
                     instance.decreaseSwitchCount()
@@ -129,14 +127,12 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                bottomMiddleSwitch.setOn(false, animated: true)
-                instance.decreaseSwitchCount()
+                bottomMiddleSwitchOff()
                 if bottomMiddleSwitch.isOn == true
                 {
                     instance.increaseSwitchCount()
                 }
-                bottomRightSwitch.setOn(false, animated: true)
-                instance.decreaseSwitchCount()
+                bottomRightSwitchOff()
                 if bottomRightSwitch.isOn == true
                 {
                     instance.increaseSwitchCount()
@@ -159,8 +155,7 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                bottomLeftSwitch.setOn(false, animated: true)
-                instance.decreaseSwitchCount()
+                bottomLeftSwitchOff()
                 if topLeftSwitch.isOn == true
                 {
                     instance.increaseSwitchCount()
@@ -183,8 +178,7 @@ class ViewController: UIViewController {
             {
                 instance.increaseSwitchCount()
                 view.backgroundColor = .blue
-                bottomMiddleSwitch.setOn(true, animated: true)
-                instance.increaseSwitchCount()
+                bottomMiddleSwitchOn()
                 if bottomMiddleSwitch.isOn == false
                 {
                     instance.decreaseSwitchCount()
@@ -254,6 +248,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func topLeftSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            topLeftSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
+        }
+    }
+    
     func topLeftSwitchOff()
     {
         if let instance = counterInstance
@@ -261,6 +264,15 @@ class ViewController: UIViewController {
             mistakeAnimation()
             topLeftSwitch.setOn(false, animated: true)
             instance.decreaseSwitchCount()
+        }
+    }
+    
+    func topMiddleSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            topMiddleSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
         }
     }
     
@@ -274,6 +286,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func topRightSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            topRightSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
+        }
+    }
+    
     func topRightSwitchOff()
     {
         if let instance = counterInstance
@@ -281,6 +302,15 @@ class ViewController: UIViewController {
             mistakeAnimation()
             topRightSwitch.setOn(false, animated: true)
             instance.decreaseSwitchCount()
+        }
+    }
+    
+    func bottomLeftSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            bottomLeftSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
         }
     }
     
@@ -294,6 +324,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func bottomMiddleSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            bottomMiddleSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
+        }
+    }
+    
     func bottomMiddleSwitchOff()
     {
         if let instance = counterInstance
@@ -301,6 +340,15 @@ class ViewController: UIViewController {
             mistakeAnimation()
             bottomMiddleSwitch.setOn(false, animated: true)
             instance.decreaseSwitchCount()
+        }
+    }
+    
+    func bottomRightSwitchOn()
+    {
+        if let instance = counterInstance
+        {
+            bottomRightSwitch.setOn(true, animated: true)
+            instance.increaseSwitchCount()
         }
     }
     
