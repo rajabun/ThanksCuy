@@ -12,11 +12,13 @@ class Counter
 {
     var steps: Int
     var mistakes: Int
+    var switches: Int
     
-    init(stepCount: Int, mistakeCount: Int)
+    init(stepCount: Int, mistakeCount: Int, switchCount: Int)
     {
         self.steps = stepCount
         self.mistakes = mistakeCount
+        self.switches = switchCount
     }
     
     func increaseStepCount()
@@ -24,8 +26,28 @@ class Counter
         self.steps += 1
     }
     
+    func decreaseStepCount()
+    {
+        self.steps -= 1
+    }
+    
     func increaseMistakeCount()
     {
         self.mistakes += 1
+    }
+    
+    func decreaseMistakeCount()
+    {
+        self.mistakes -= 1
+    }
+    
+    func increaseSwitchCount()
+    {
+        self.switches += 1
+    }
+    
+    func decreaseSwitchCount()
+    {
+        self.switches -= 1
     }
 }
