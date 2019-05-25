@@ -78,13 +78,9 @@
                                 <rect key="frame" x="184" y="286" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36826851649999998" green="0.59163639109999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="Thanks">
+                                <state key="normal" title="Button">
                                     <color key="titleColor" red="0.36826851649999998" green="0.59163639109999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
-                                <connections>
-                                    <action selector="circleButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tnK-f0-hOY"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
