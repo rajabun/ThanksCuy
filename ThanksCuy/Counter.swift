@@ -44,10 +44,12 @@ class Counter
     func increaseSwitchCount()
     {
         self.switches += 1
+        print("Switch Count = ", self.switches)
     }
     
     func decreaseSwitchCount()
     {
         self.switches -= 1
+        print("Switch Count = ", self.switches)
     }
 }

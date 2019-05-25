@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController
+{
     @IBOutlet weak var topLeftSwitch: UISwitch!
     @IBOutlet weak var topMiddleSwitch: UISwitch!
     @IBOutlet weak var topRightSwitch: UISwitch!
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
     var currentAnimation = 0
     
     var counterInstance: Counter?
+    var player: AVAudioPlayer?
     
     override func viewDidLoad()
     {
@@ -32,7 +34,23 @@ class ViewController: UIViewController {
         counterInstance = Counter(stepCount: 0, mistakeCount: 0, switchCount: 0)
         
         circleShape.layer.cornerRadius = circleShape.frame.width/2
+        /*
+        //Play a background audio
+        let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
+        let url = URL(fileURLWithPath: path)
         
+        do
+        {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+            player?.numberOfLoops = 5
+        }
+        catch
+        {
+            // couldn't load file :(
+            print(error)
+        }
+        */
         //update ui after initiation
         updateUI()
     }
@@ -46,9 +64,21 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func circleButtonClicked(_ sender: UIButton)
+    {
+        if let instance = counterInstance
+        {
+            if instance.mistakes > 50
+            {
+                sender.setTitleColor(.white, for: .normal)
+                allOn()
+            }
+        }
+    }
+    
+    
     @IBAction func topLeftSwitchClicked(_ sender: UISwitch)
     {
-        moreThanTenSteps()
         if let instance = counterInstance
         {
             if topLeftSwitch.isOn == true
@@ -377,6 +407,7 @@ class ViewController: UIViewController {
             instance.increaseMistakeCount()
             UIView.animate(withDuration: 1)
             {
+                //self.view.backgroundColor = .white
                 switch self.currentAnimation
                 {
                     case 0:
@@ -405,7 +436,7 @@ class ViewController: UIViewController {
         {
             self.currentAnimation = 0
         }
-        print(self.currentAnimation)
+        print("Circle Mistake Animation = ", self.currentAnimation)
     }
     
     func setSwitchColor()
