@@ -20,7 +20,8 @@ class ViewController: UIViewController
     @IBOutlet weak var mistakesLabel: UILabel!
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var circleShape: UIButton!
-    var currentAnimation = 0
+    var currentMistakeAnimation = 0
+    var currentStepAnimation = 0
     
     var counterInstance: Counter?
     var player: AVAudioPlayer?
@@ -61,6 +62,15 @@ class ViewController: UIViewController
         {
             mistakesLabel.text = "\(instance.mistakes)"
             stepLabel.text = "\(instance.steps)"
+            
+            if instance.mistakes > 5
+            {
+                UIView.transition(with: circleShape.titleLabel!, duration: 3, options: .transitionCrossDissolve, animations:
+                    {
+                        self.circleShape.setTitleColor(.white, for: .normal)
+                    }, completion: nil)
+                //circleShape.setTitleColor(.white, for: .normal)
+            }
         }
     }
 
@@ -70,7 +80,6 @@ class ViewController: UIViewController
         {
             if instance.mistakes > 50
             {
-                sender.setTitleColor(.white, for: .normal)
                 allOn()
             }
         }
@@ -84,7 +93,7 @@ class ViewController: UIViewController
             if topLeftSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .blue
+                //view.backgroundColor = .blue
                 topMiddleSwitchOnOff()
             }
             else
@@ -92,6 +101,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topRightSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -104,7 +114,7 @@ class ViewController: UIViewController
             if topMiddleSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .yellow
+                //view.backgroundColor = .yellow
                 topRightSwitchOnOff()
             }
             else
@@ -112,6 +122,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topLeftSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -124,7 +135,7 @@ class ViewController: UIViewController
             if topRightSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .white
+                //view.backgroundColor = .white
                 topLeftSwitchOnOff()
             }
             else
@@ -132,6 +143,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topMiddleSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -144,7 +156,7 @@ class ViewController: UIViewController
             if bottomLeftSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .blue
+                //view.backgroundColor = .blue
                 bottomRightSwitchOnOff()
             }
             else
@@ -152,6 +164,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomMiddleSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -164,7 +177,7 @@ class ViewController: UIViewController
             if bottomMiddleSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .blue
+                //view.backgroundColor = .blue
                 bottomLeftSwitchOnOff()
             }
             else
@@ -172,6 +185,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomRightSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -184,7 +198,7 @@ class ViewController: UIViewController
             if bottomRightSwitch.isOn == true
             {
                 instance.increaseSwitchCount()
-                view.backgroundColor = .blue
+                //view.backgroundColor = .blue
                 bottomMiddleSwitchOnOff()
             }
             else
@@ -192,6 +206,7 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomLeftSwitchOnOff()
             }
+            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -361,7 +376,7 @@ class ViewController: UIViewController
             }
         }
     }
-
+    
     func mistakeLabelAnimation()
     {
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
@@ -385,10 +400,14 @@ class ViewController: UIViewController
             UIView.animate(withDuration: 1)
             {
                 //self.view.backgroundColor = .white
-                switch self.currentAnimation
+                switch self.currentMistakeAnimation
                 {
                     case 0:
                         self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                        //self.circleShape.titleLabel?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+                        //self.circleShape.titleLabel?.adjustsFontSizeToFitWidth = true
+                        //self.circleShape.titleLabel?.font = self.circleShape.titleLabel?.font.withSize(11)
+                        //self.circleShape.titleLabel?.font = UIFont.systemFont(ofSize: 11)
                     case 1:
                         self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
                     case 2:
@@ -406,14 +425,84 @@ class ViewController: UIViewController
                     default:
                         break
                 }
+                self.currentMistakeAnimation += 1
+                if self.currentMistakeAnimation > 7
+                {
+                    self.currentMistakeAnimation = 0
+                }
+                print("Circle Mistake Animation = ", self.currentMistakeAnimation)
+                //print("Font Size = ", self.circleShape.titleLabel?.font)
             }
         }
-        self.currentAnimation += 1
-        if self.currentAnimation > 7
-        {
-            self.currentAnimation = 0
-        }
-        print("Circle Mistake Animation = ", self.currentAnimation)
+    }
+    
+    func stepApplied()
+    {
+        UIView.animate(withDuration: 1)
+            {
+                //self.view.backgroundColor = .white
+                switch self.currentStepAnimation
+                {
+                case 0,1,2,3,4,5,6,7:
+                    if self.currentMistakeAnimation == 8
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 4.5, y: 4.5)
+                        if self.currentMistakeAnimation == 7
+                        {
+                            self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
+                            if self.currentMistakeAnimation == 6
+                            {
+                                self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
+                                if self.currentMistakeAnimation == 5
+                                {
+                                    self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
+                                    if self.currentMistakeAnimation == 4
+                                    {
+                                        self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+                                        if self.currentMistakeAnimation == 3
+                                        {
+                                            self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
+                                            if self.currentMistakeAnimation == 2
+                                            {
+                                                self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                                                if self.currentMistakeAnimation == 1
+                                                {
+                                                    self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    
+
+                    
+
+                    
+
+                    
+  
+                    
+
+                    
+
+                    
+                    else
+                    {
+                        self.currentStepAnimation += 1
+                    }
+                default:
+                    break
+                }
+                if self.currentStepAnimation > 7
+                {
+                    self.currentStepAnimation = 0
+                }
+                print("Circle Step Animation = ", self.currentStepAnimation)
+            }
     }
     
     func setSwitchColor()

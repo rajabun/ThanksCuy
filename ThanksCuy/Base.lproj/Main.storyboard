@@ -78,6 +78,7 @@
                                 <rect key="frame" x="184" y="286" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36826851649999998" green="0.59163639109999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.36826851649999998" green="0.59163639109999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
