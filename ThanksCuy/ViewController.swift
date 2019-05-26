@@ -20,8 +20,8 @@ class ViewController: UIViewController
     @IBOutlet weak var mistakesLabel: UILabel!
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var circleShape: UIButton!
+    @IBOutlet weak var mistakeIcon: UIImageView!
     var currentMistakeAnimation = 0
-    var currentStepAnimation = 0
     
     var counterInstance: Counter?
     var player: AVAudioPlayer?
@@ -34,23 +34,10 @@ class ViewController: UIViewController
         //initiation for class Counter
         counterInstance = Counter(stepCount: 0, mistakeCount: 0, switchCount: 0)
         
-        circleShape.layer.cornerRadius = circleShape.frame.width/2
+        //circleShape.layer.cornerRadius = circleShape.frame.width/2
         /*
         //Play a background audio
-        let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
-        let url = URL(fileURLWithPath: path)
         
-        do
-        {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-            player?.numberOfLoops = 5
-        }
-        catch
-        {
-            // couldn't load file :(
-            print(error)
-        }
         */
         //update ui after initiation
         updateUI()
@@ -60,16 +47,29 @@ class ViewController: UIViewController
     {
         if let instance = counterInstance
         {
-            mistakesLabel.text = "\(instance.mistakes)"
+            //mistakesLabel.text = "\(instance.mistakes)"
             stepLabel.text = "\(instance.steps)"
             
             if instance.mistakes > 5
             {
+                /*
                 UIView.transition(with: circleShape.titleLabel!, duration: 3, options: .transitionCrossDissolve, animations:
                     {
                         self.circleShape.setTitleColor(.white, for: .normal)
                     }, completion: nil)
                 //circleShape.setTitleColor(.white, for: .normal)
+                 //circleShape.addTarget(self, action: #selector(circleButtonClicked(_:)), for: .touchUpInside)
+                 //view.addSubview(circleShape)
+                 //self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
+                 //if circleShape.isTouchInside == true
+                 */
+                allOn()
+                self.circleShape.setImage(UIImage(named: "Happy-Icon"), for: .normal)
+                    UIView.animate(withDuration: 1, delay: 0.5, options: [.repeat], animations:
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                    }, completion: nil)
+               
             }
         }
     }
@@ -78,9 +78,23 @@ class ViewController: UIViewController
     {
         if let instance = counterInstance
         {
-            if instance.mistakes > 50
+            if instance.mistakes > 5
             {
-                allOn()
+                //allOn()
+                let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
+                let url = URL(fileURLWithPath: path)
+                
+                do
+                {
+                    player = try AVAudioPlayer(contentsOf: url)
+                    player?.play()
+                    player?.numberOfLoops = 5
+                }
+                catch
+                {
+                    // couldn't load file :(
+                    print(error)
+                }
             }
         }
     }
@@ -101,7 +115,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topRightSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -122,7 +135,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topLeftSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -143,7 +155,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 topMiddleSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -164,7 +175,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomMiddleSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -185,7 +195,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomRightSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -206,7 +215,6 @@ class ViewController: UIViewController
                 instance.decreaseSwitchCount()
                 bottomLeftSwitchOnOff()
             }
-            stepApplied()
             instance.increaseStepCount()
         }
         updateUI()
@@ -261,6 +269,7 @@ class ViewController: UIViewController
         {//Switch On
             if topLeftSwitch.isOn == false
             {
+                stepApplied()
                 topLeftSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -281,6 +290,7 @@ class ViewController: UIViewController
         {//Switch On
             if topMiddleSwitch.isOn == false
             {
+                stepApplied()
                 topMiddleSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -301,6 +311,7 @@ class ViewController: UIViewController
         {//Switch On
             if topRightSwitch.isOn == false
             {
+                stepApplied()
                 topRightSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -321,6 +332,7 @@ class ViewController: UIViewController
         {//Switch On
             if bottomLeftSwitch.isOn == false
             {
+                stepApplied()
                 bottomLeftSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -341,6 +353,7 @@ class ViewController: UIViewController
         {//Switch On
             if bottomMiddleSwitch.isOn == false
             {
+                stepApplied()
                 bottomMiddleSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -361,6 +374,7 @@ class ViewController: UIViewController
         {//Switch On
             if bottomRightSwitch.isOn == false
             {
+                stepApplied()
                 bottomRightSwitch.setOn(true, animated: true)
                 instance.increaseSwitchCount()
             }
@@ -379,14 +393,17 @@ class ViewController: UIViewController
     
     func mistakeLabelAnimation()
     {
+        self.circleShape.setImage(UIImage(named: "Sad-Icon"), for: .normal)
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
             {
-            self.mistakesLabel.transform = CGAffineTransform(scaleX: 3, y: 3)
+            //self.mistakesLabel.transform = CGAffineTransform(scaleX: 3, y: 3)
+            self.mistakeIcon.transform = CGAffineTransform(scaleX: 2, y: 2)
             }, completion:
                 { finish in
                     UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
                         {
-                            self.mistakesLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+                            //self.mistakesLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+                            self.mistakeIcon.transform = CGAffineTransform(scaleX: 1, y: 1)
                         }, completion: nil)
                 })
     }
@@ -430,7 +447,7 @@ class ViewController: UIViewController
                 {
                     self.currentMistakeAnimation = 0
                 }
-                print("Circle Mistake Animation = ", self.currentMistakeAnimation)
+                //print("Circle Mistake Animation = ", self.currentMistakeAnimation)
                 //print("Font Size = ", self.circleShape.titleLabel?.font)
             }
         }
@@ -438,70 +455,44 @@ class ViewController: UIViewController
     
     func stepApplied()
     {
+        self.circleShape.setImage(UIImage(named: "Smile-Icon"), for: .normal)
         UIView.animate(withDuration: 1)
             {
                 //self.view.backgroundColor = .white
-                switch self.currentStepAnimation
-                {
-                case 0,1,2,3,4,5,6,7:
+                    //self.currentStepAnimation += 1
                     if self.currentMistakeAnimation == 8
                     {
                         self.circleShape.transform = CGAffineTransform(scaleX: 4.5, y: 4.5)
-                        if self.currentMistakeAnimation == 7
-                        {
-                            self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
-                            if self.currentMistakeAnimation == 6
-                            {
-                                self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
-                                if self.currentMistakeAnimation == 5
-                                {
-                                    self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
-                                    if self.currentMistakeAnimation == 4
-                                    {
-                                        self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
-                                        if self.currentMistakeAnimation == 3
-                                        {
-                                            self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
-                                            if self.currentMistakeAnimation == 2
-                                            {
-                                                self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                                                if self.currentMistakeAnimation == 1
-                                                {
-                                                    self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
-
-                    
-
-                    
-
-                    
-
-                    
-  
-                    
-
-                    
-
-                    
-                    else
+                    else if self.currentMistakeAnimation == 7
                     {
-                        self.currentStepAnimation += 1
+                        self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
                     }
-                default:
-                    break
-                }
-                if self.currentStepAnimation > 7
-                {
-                    self.currentStepAnimation = 0
-                }
-                print("Circle Step Animation = ", self.currentStepAnimation)
+                    else if self.currentMistakeAnimation == 6
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
+                    }
+                    else if self.currentMistakeAnimation == 5
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
+                    }
+                    else if self.currentMistakeAnimation == 4
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+                    }
+                    else if self.currentMistakeAnimation == 3
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
+                    }
+                    else if self.currentMistakeAnimation == 2
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    }
+                    else if self.currentMistakeAnimation == 1
+                    {
+                        self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    }
+                print("Current Mistake Animation = ", self.currentMistakeAnimation)
             }
     }
     

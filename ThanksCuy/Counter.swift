@@ -24,21 +24,25 @@ class Counter
     func increaseStepCount()
     {
         self.steps += 1
+        print("Step Count = ", self.steps)
     }
     
     func decreaseStepCount()
     {
         self.steps -= 1
+        print("Step Count = ", self.steps)
     }
     
     func increaseMistakeCount()
     {
         self.mistakes += 1
+        print("Mistake Count = ", self.mistakes)
     }
     
     func decreaseMistakeCount()
     {
         self.mistakes -= 1
+        print("Mistake Count = ", self.mistakes)
     }
     
     func increaseSwitchCount()
