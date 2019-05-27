@@ -102,6 +102,20 @@
                                 <rect key="frame" x="241" y="120" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thanks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlx-d4-gsu">
+                                <rect key="frame" x="129" y="406" width="157" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="1" green="0.97647058819999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Be Grateful Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbN-nU-En6">
+                                <rect key="frame" x="51" y="669" width="317" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" red="1" green="0.97647058819999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97647058823529409" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -111,9 +125,12 @@
                         <outlet property="bottomMiddleSwitch" destination="Bd9-bh-Va3" id="r8Z-7N-BiJ"/>
                         <outlet property="bottomRightSwitch" destination="Tcf-47-30C" id="zD0-Bt-Tsw"/>
                         <outlet property="circleShape" destination="hAN-3o-UOz" id="H1H-Sb-pAA"/>
+                        <outlet property="gratefulLabel" destination="BbN-nU-En6" id="YNe-Ll-Adr"/>
                         <outlet property="mistakeIcon" destination="ThE-ik-otB" id="xnH-rz-jtp"/>
                         <outlet property="mistakesLabel" destination="oXx-Re-BSc" id="quN-22-M3L"/>
+                        <outlet property="stepIcon" destination="bmv-Vw-ztY" id="Jul-y0-XL1"/>
                         <outlet property="stepLabel" destination="MpP-5v-xAl" id="Lxh-1p-ZXI"/>
+                        <outlet property="thanksLabel" destination="zlx-d4-gsu" id="lzq-A9-164"/>
                         <outlet property="topLeftSwitch" destination="fkF-Fj-kjq" id="cwW-Eo-diE"/>
                         <outlet property="topMiddleSwitch" destination="boY-BW-y9S" id="QXz-za-B1q"/>
                         <outlet property="topRightSwitch" destination="Wfj-ve-Jh3" id="5eY-A7-21t"/>

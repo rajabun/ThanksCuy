@@ -21,6 +21,10 @@ class ViewController: UIViewController
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var circleShape: UIButton!
     @IBOutlet weak var mistakeIcon: UIImageView!
+    @IBOutlet weak var stepIcon: UIImageView!
+    @IBOutlet weak var thanksLabel: UILabel!
+    @IBOutlet weak var gratefulLabel: UILabel!
+    
     var currentMistakeAnimation = 0
     
     var counterInstance: Counter?
@@ -112,6 +116,40 @@ class ViewController: UIViewController
         //free license audio by : http://soundbible.com/1705-Click2.html
     }
     
+    func changeBgColorPink()
+    {
+        UIView.animate(withDuration: 3, delay: 1, options: [], animations:
+        {
+            self.view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.3098039216, blue: 0.5019607843, alpha: 1)
+        }, completion: nil)
+    }
+    
+    func changeIconWhite()
+    {
+        UIView.animate(withDuration: 4, delay: 1, options: [], animations:
+        {
+            self.stepIcon.image = UIImage(named: "Step-Icon-White")
+            self.mistakeIcon.image = UIImage(named: "Mistake-Icon-White")
+        }, completion: nil)
+    }
+    
+    func changeHappyIconWhite()
+    {
+        UIView.animate(withDuration: 4, delay: 1, options: [], animations:
+            {
+                self.circleShape.setImage(UIImage(named: "Happy-Icon-White"), for: .normal)
+        }, completion: nil)
+    }
+    
+    func changeLabelWhite()
+    {
+        UIView.animate(withDuration: 5, delay: 1, options: [], animations:
+        {
+            self.thanksLabel.textColor = .white
+            self.gratefulLabel.textColor = .white
+        }, completion: nil)
+    }
+    
     @IBAction func circleButtonClicked(_ sender: UIButton)
     {
         print("Smile Button Pressed")
@@ -120,11 +158,10 @@ class ViewController: UIViewController
             if instance.mistakes > 5
             {
                 //allOn()
-                
-                UIView.animate(withDuration: 2)
-                {
-                    self.view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.3098039216, blue: 0.5019607843, alpha: 1)
-                }
+                changeBgColorPink()
+                changeIconWhite()
+                changeHappyIconWhite()
+                changeLabelWhite()
                 audioPlay()
             }
         }
@@ -446,6 +483,21 @@ class ViewController: UIViewController
                 })
     }
     
+    func stepLabelAnimation()
+    {
+        self.circleShape.setImage(UIImage(named: "Smile-Icon"), for: .normal)
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
+            {
+                self.stepIcon.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }, completion:
+            { finish in
+                UIView.animate(withDuration: 0.5, delay: 0, options: [], animations:
+                    {
+                        self.stepIcon.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
+        })
+    }
+    
     func mistakeApplied()
     {
         if let instance = counterInstance
@@ -493,7 +545,8 @@ class ViewController: UIViewController
     
     func stepApplied()
     {
-        self.circleShape.setImage(UIImage(named: "Smile-Icon"), for: .normal)
+        //self.circleShape.setImage(UIImage(named: "Smile-Icon"), for: .normal)
+        stepLabelAnimation()
         UIView.animate(withDuration: 1)
             {
                 //self.view.backgroundColor = .white
