@@ -25,6 +25,8 @@ class ViewController: UIViewController
     @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var gratefulLabel: UILabel!
     
+    var finishCounter = 0
+    
     var currentMistakeAnimation = 0
     
     var counterInstance: Counter?
@@ -35,16 +37,19 @@ class ViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        //make thanks and grateful label hidden
+        self.thanksLabel.isHidden = true
+        self.gratefulLabel.isHidden = true
+        
         //initiation for class Counter
         counterInstance = Counter(stepCount: 0, mistakeCount: 0, switchCount: 0)
         
+        //remove mistakes and step label from view controller
         mistakesLabel.removeFromSuperview()
         stepLabel.removeFromSuperview()
-        //circleShape.layer.cornerRadius = circleShape.frame.width/2
-        /*
-        //Play a background audio
         
-        */
+        //circleShape.layer.cornerRadius = circleShape.frame.width/2
+        
         //update ui after initiation
         updateUI()
     }
@@ -79,7 +84,8 @@ class ViewController: UIViewController
             }
         }
     }
-
+    
+    //Function for play a background audio
     func audioPlay()
     {
         let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
@@ -121,33 +127,36 @@ class ViewController: UIViewController
         UIView.animate(withDuration: 3, delay: 1, options: [], animations:
         {
             self.view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.3098039216, blue: 0.5019607843, alpha: 1)
-        }, completion: nil)
-    }
-    
-    func changeIconWhite()
-    {
-        UIView.animate(withDuration: 4, delay: 1, options: [], animations:
-        {
-            self.stepIcon.image = UIImage(named: "Step-Icon-White")
-            self.mistakeIcon.image = UIImage(named: "Mistake-Icon-White")
-        }, completion: nil)
-    }
-    
-    func changeHappyIconWhite()
-    {
-        UIView.animate(withDuration: 4, delay: 1, options: [], animations:
-            {
-                self.circleShape.setImage(UIImage(named: "Happy-Icon-White"), for: .normal)
-        }, completion: nil)
-    }
-    
-    func changeLabelWhite()
-    {
-        UIView.animate(withDuration: 5, delay: 1, options: [], animations:
-        {
-            self.thanksLabel.textColor = .white
-            self.gratefulLabel.textColor = .white
-        }, completion: nil)
+        }, completion: { finish in
+            UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                {
+                    self.stepIcon.image = UIImage(named: "Step-Icon-White")
+            }, completion:
+                { finish in
+                    UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                        {
+                            self.mistakeIcon.image = UIImage(named: "Mistake-Icon-White")
+                    }, completion:
+                        { finish in
+                            UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                                {
+                                    self.circleShape.setImage(UIImage(named: "Happy-Icon-White"), for: .normal)
+                            }, completion:
+                                { finish in
+                                    UIView.animate(withDuration: 1, delay: 1, options: [], animations:
+                                        {
+                                            self.circleShape.frame = CGRect(x: 184, y: 770, width: 50, height: 50)
+                                    }, completion:
+                                        { finish in
+                                            UIView.animate(withDuration: 1, delay: 1, options: [.repeat], animations:
+                                                {
+                                                    self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
+                                            }, completion: nil)
+                                    })
+                            })
+                    })
+            })
+        })
     }
     
     @IBAction func circleButtonClicked(_ sender: UIButton)
@@ -158,10 +167,16 @@ class ViewController: UIViewController
             if instance.mistakes > 5
             {
                 //allOn()
+                self.stepIcon.image = UIImage(named: "Step-Icon-White")
+                self.mistakeIcon.image = UIImage(named: "Mistake-Icon-White")
+                self.finishCounter += 1
+                print(self.finishCounter)
+                //self.thanksLabel.textColor = .white
+                //self.gratefulLabel.textColor = .white
+                self.thanksLabel.isHidden = false
+                self.gratefulLabel.isHidden = false
                 changeBgColorPink()
-                changeIconWhite()
-                changeHappyIconWhite()
-                changeLabelWhite()
+
                 audioPlay()
             }
         }
@@ -186,6 +201,10 @@ class ViewController: UIViewController
                 topRightSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -207,6 +226,10 @@ class ViewController: UIViewController
                 topLeftSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -228,6 +251,10 @@ class ViewController: UIViewController
                 topMiddleSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -249,6 +276,10 @@ class ViewController: UIViewController
                 bottomMiddleSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -270,6 +301,10 @@ class ViewController: UIViewController
                 bottomRightSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -291,6 +326,10 @@ class ViewController: UIViewController
                 bottomLeftSwitchOnOff()
             }
             instance.increaseStepCount()
+            if finishCounter == 1
+            {
+                reset()
+            }
         }
         updateUI()
     }
@@ -551,41 +590,88 @@ class ViewController: UIViewController
             {
                 //self.view.backgroundColor = .white
                     //self.currentStepAnimation += 1
-                    if self.currentMistakeAnimation == 8
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 4.5, y: 4.5)
-                    }
-                    else if self.currentMistakeAnimation == 7
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
-                    }
-                    else if self.currentMistakeAnimation == 6
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
-                    }
-                    else if self.currentMistakeAnimation == 5
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
-                    }
-                    else if self.currentMistakeAnimation == 4
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
-                    }
-                    else if self.currentMistakeAnimation == 3
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
-                    }
-                    else if self.currentMistakeAnimation == 2
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                    }
-                    else if self.currentMistakeAnimation == 1
-                    {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
-                    }
+                if self.currentMistakeAnimation == 8
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 4.5, y: 4.5)
+                }
+                else if self.currentMistakeAnimation == 7
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 4, y: 4)
+                }
+                else if self.currentMistakeAnimation == 6
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
+                }
+                else if self.currentMistakeAnimation == 5
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 3, y: 3)
+                }
+                else if self.currentMistakeAnimation == 4
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+                }
+                else if self.currentMistakeAnimation == 3
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 2, y: 2)
+                }
+                else if self.currentMistakeAnimation == 2
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                }
+                else if self.currentMistakeAnimation == 1
+                {
+                    self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }
                 print("Current Mistake Animation = ", self.currentMistakeAnimation)
             }
     }
     
-}
+    func reset()
+    {
+        //self.circleShape.layer.removeAllAnimations()
+        allOff()
+        self.thanksLabel.isHidden = true
+        self.gratefulLabel.isHidden = true
+        //self.thanksLabel.textColor = #colorLiteral(red: 1, green: 0.9764705882, blue: 0.3137254902, alpha: 1)
+        //self.gratefulLabel.textColor = #colorLiteral(red: 1, green: 0.9764705882, blue: 0.3137254902, alpha: 1)
+        self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
+        if let instance = counterInstance
+        {
+            instance.mistakes = 0
+            instance.steps = 0
+            instance.switches = 0
+            self.currentMistakeAnimation = 0
+            self.finishCounter = 0
+        }
+        
+        UIView.animate(withDuration: 3, delay: 1, options: [], animations:
+        {
+            self.view.backgroundColor = #colorLiteral(red: 1, green: 0.9764705882, blue: 0.3137254902, alpha: 1)
+        }, completion: { finish in
+            UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                {
+                    self.stepIcon.image = UIImage(named: "Step-Icon")
+            }, completion:
+                { finish in
+                    UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                    {
+                        self.mistakeIcon.image = UIImage(named: "Mistake-Icon")
+                    }, completion:
+                        { finish in
+                            UIView.animate(withDuration: 4, delay: 2, options: [], animations:
+                            {
+                                self.circleShape.setImage(UIImage(named: "Smile-Icon"), for: .normal)
+                            }, completion:
+                                { finish in
+                                    UIView.animate(withDuration: 1, delay: 1, options: [], animations:
+                                        {
+                                            self.circleShape.frame = CGRect(x: 184, y: 300, width: 50, height: 50)
+                                        }, completion: nil)
+                                })
+                        })
+                })
+            })
+        self.circleShape.layer.removeAllAnimations()
+    }
 
+}
