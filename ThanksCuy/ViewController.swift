@@ -34,6 +34,8 @@ class ViewController: UIViewController
         //initiation for class Counter
         counterInstance = Counter(stepCount: 0, mistakeCount: 0, switchCount: 0)
         
+        mistakesLabel.removeFromSuperview()
+        stepLabel.removeFromSuperview()
         //circleShape.layer.cornerRadius = circleShape.frame.width/2
         /*
         //Play a background audio
@@ -48,7 +50,7 @@ class ViewController: UIViewController
         if let instance = counterInstance
         {
             //mistakesLabel.text = "\(instance.mistakes)"
-            stepLabel.text = "\(instance.steps)"
+            //stepLabel.text = "\(instance.steps)"
             
             if instance.mistakes > 5
             {
@@ -62,46 +64,77 @@ class ViewController: UIViewController
                  //view.addSubview(circleShape)
                  //self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
                  //if circleShape.isTouchInside == true
+                 //self.circleShape.layer.removeAllAnimations()
                  */
                 allOn()
                 self.circleShape.setImage(UIImage(named: "Happy-Icon"), for: .normal)
-                    UIView.animate(withDuration: 1, delay: 0.5, options: [.repeat], animations:
+                    UIView.animate(withDuration: 1, delay: 0.5, options: [.autoreverse], animations:
                     {
-                        self.circleShape.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                        self.circleShape.transform = CGAffineTransform(scaleX: 1, y: 1)
                     }, completion: nil)
-               
             }
         }
     }
 
+    func audioPlay()
+    {
+        let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
+        let url = URL(fileURLWithPath: path)
+        
+        do
+        {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+            player?.numberOfLoops = 5
+        }
+        catch
+        {
+            // couldn't load file :(
+            print(error)
+        }
+    }
+    
+    func audioClick()
+    {
+        let path = Bundle.main.path(forResource: "Switch-Click", ofType: "wav")!
+        let url = URL(fileURLWithPath: path)
+        
+        do
+        {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        }
+        catch
+        {
+            // couldn't load file :(
+            print(error)
+        }
+        //free license audio by : http://soundbible.com/1705-Click2.html
+    }
+    
     @IBAction func circleButtonClicked(_ sender: UIButton)
     {
+        print("Smile Button Pressed")
         if let instance = counterInstance
         {
             if instance.mistakes > 5
             {
                 //allOn()
-                let path = Bundle.main.path(forResource: "Joy & Calm", ofType: "m4a")!
-                let url = URL(fileURLWithPath: path)
                 
-                do
+                UIView.animate(withDuration: 2)
                 {
-                    player = try AVAudioPlayer(contentsOf: url)
-                    player?.play()
-                    player?.numberOfLoops = 5
+                    self.view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.3098039216, blue: 0.5019607843, alpha: 1)
                 }
-                catch
-                {
-                    // couldn't load file :(
-                    print(error)
-                }
+                audioPlay()
             }
         }
+        updateUI()
     }
     
     
     @IBAction func topLeftSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if topLeftSwitch.isOn == true
@@ -122,6 +155,7 @@ class ViewController: UIViewController
     
     @IBAction func topMiddleSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if topMiddleSwitch.isOn == true
@@ -142,6 +176,7 @@ class ViewController: UIViewController
     
     @IBAction func topRightSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if topRightSwitch.isOn == true
@@ -162,6 +197,7 @@ class ViewController: UIViewController
     
     @IBAction func bottomLeftSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if bottomLeftSwitch.isOn == true
@@ -182,6 +218,7 @@ class ViewController: UIViewController
     
     @IBAction func bottomMiddleSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if bottomMiddleSwitch.isOn == true
@@ -202,6 +239,7 @@ class ViewController: UIViewController
     
     @IBAction func bottomRightSwitchClicked(_ sender: UISwitch)
     {
+        audioClick()
         if let instance = counterInstance
         {
             if bottomRightSwitch.isOn == true
@@ -496,10 +534,5 @@ class ViewController: UIViewController
             }
     }
     
-    func setSwitchColor()
-    {
-        topLeftSwitch.onTintColor = #colorLiteral(red: 0.9421673417, green: 0.9228832722, blue: 0.031715855, alpha: 1)
-        
-    }
 }
 

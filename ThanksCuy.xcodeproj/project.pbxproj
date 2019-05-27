@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E46BB1C229B71BA00461A28 /* Switch-Click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4E46BB1B229B71BA00461A28 /* Switch-Click.wav */; };
 		4E72580E2293FFCD004768FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EC86E94228E573A00783BF6 /* Assets.xcassets */; };
 		4E75AC932294E98A001221A1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E725810229404A3004768FD /* AVFoundation.framework */; };
 		4E75AC9A2294EFEC001221A1 /* Joy & Calm.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E75AC992294EFEC001221A1 /* Joy & Calm.m4a */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E46BB1B229B71BA00461A28 /* Switch-Click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Switch-Click.wav"; sourceTree = "<group>"; };
 		4E725810229404A3004768FD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4E75AC992294EFEC001221A1 /* Joy & Calm.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Joy & Calm.m4a"; sourceTree = "<group>"; };
 		4EC86E8A228E573A00783BF6 /* ThanksCuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThanksCuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +55,7 @@
 		4E75AC962294EF2F001221A1 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				4E46BB1B229B71BA00461A28 /* Switch-Click.wav */,
 				4E75AC992294EFEC001221A1 /* Joy & Calm.m4a */,
 			);
 			path = Sounds;
@@ -152,6 +155,7 @@
 				4E72580E2293FFCD004768FD /* Assets.xcassets in Resources */,
 				4EC86E93228E573A00783BF6 /* Main.storyboard in Resources */,
 				4E75AC9A2294EFEC001221A1 /* Joy & Calm.m4a in Resources */,
+				4E46BB1C229B71BA00461A28 /* Switch-Click.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
